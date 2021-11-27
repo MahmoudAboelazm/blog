@@ -1,0 +1,40 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""user """
+type User {
+  username: String!
+  email: String!
+  creationDate: Date!
+  blogsIds: [String!]!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type LoginResponse {
+  token: String!
+  user: User!
+}
+
+type Query {
+  me: User
+}
+
+type Mutation {
+  login(loginInput: LoginUserInput!): LoginResponse
+  register(newUserData: NewUserInput!): User!
+}
+
+input LoginUserInput {
+  usernameOrEmail: String!
+  password: String!
+}
+
+input NewUserInput {
+  username: String!
+  password: String!
+  email: String!
+  creationDate: Date
+}
