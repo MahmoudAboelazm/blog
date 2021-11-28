@@ -6,7 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { NewUserInput } from './dto/new-user.input';
-import { User } from './models/user.model';
+import { LoginResponse, User } from './models/user.model';
 import { Model } from 'mongoose';
 import { sign } from 'jsonwebtoken';
 import { hash, verify } from 'argon2';
@@ -22,7 +22,7 @@ export class UsersService {
   ) {}
 
   async jwtCreateToken(payload: TokenPayload) {
-    return sign(payload, process.env.JWT_SECRETE);
+    return sign(payload, process.env.JWT_SECRETE as string);
   }
 
   async createUser(data: NewUserInput): Promise<User> {
@@ -42,7 +42,7 @@ export class UsersService {
     }
   }
 
-  async findUser(data: LoginUserInput) {
+  async findUser(data: LoginUserInput): Promise<LoginResponse> {
     const user = await this.userModel.findOne(
       data.usernameOrEmail.includes('@')
         ? {
@@ -51,14 +51,14 @@ export class UsersService {
         : { username: data.usernameOrEmail },
     );
 
-    await this.validateUser(user, data);
+    await this.validateUser(user!, data);
 
     const token = await this.jwtCreateToken({
-      _id: user._id,
-      username: user.username,
+      _id: user!._id,
+      username: user!.username,
     });
 
-    return { user, token };
+    return { user, token } as LoginResponse;
   }
 
   async validateUser(user: User & { password: string }, data: LoginUserInput) {

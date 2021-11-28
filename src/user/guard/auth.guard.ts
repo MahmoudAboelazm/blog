@@ -8,7 +8,10 @@ export class AuthGuard implements CanActivate {
     const ctx = GqlExecutionContext.create(context).getContext();
     if (!ctx.headers.authorization) return false;
     try {
-      ctx.user = jwtVerify(ctx.headers.authorization, process.env.JWT_SECRETE);
+      ctx.user = jwtVerify(
+        ctx.headers.authorization,
+        process.env.JWT_SECRETE as string,
+      );
       return true;
     } catch (err) {
       return false;

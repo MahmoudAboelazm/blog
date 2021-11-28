@@ -17,6 +17,7 @@ import { UsersService } from './user/users.service';
       useFactory: (usersService: UsersService) => ({
         installSubscriptionHandlers: true,
         autoSchemaFile: 'schema.gql',
+        playground: true,
         context: ({ req }) => ({
           headers: req.headers,
           usersLoader: createUsersLoader(usersService),
