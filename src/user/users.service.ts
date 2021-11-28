@@ -12,7 +12,7 @@ import { sign } from 'jsonwebtoken';
 import { hash, verify } from 'argon2';
 import { LoginUserInput } from './dto/login-user.input';
 import { TokenPayload } from './dto/token-payload.input';
-import { handleError } from 'src/common/utils/handleError';
+import { handleError } from '../common/utils/handleError';
 
 @Injectable()
 export class UsersService {
