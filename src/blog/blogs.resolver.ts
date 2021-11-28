@@ -10,7 +10,7 @@ import {
   Root,
 } from '@nestjs/graphql';
 import DataLoader from 'dataloader';
-import { User } from 'src/user/models/user.model';
+import { User } from '../user/models/user.model';
 import { AuthGuard } from '../user/guard/auth.guard';
 import { BlogsService } from './blogs.service';
 import { BlogsArgs } from './dto/blogs-args.input';
