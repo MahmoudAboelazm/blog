@@ -57,6 +57,7 @@ export class UsersService {
       _id: user._id,
       username: user.username,
     });
+
     return { user, token };
   }
 
@@ -66,5 +67,9 @@ export class UsersService {
 
     const validate = await verify(user.password, data.password);
     if (!validate) throw handleError(NotFoundException, 'invalid password!');
+  }
+
+  async findByIds(userIds: string[]) {
+    return await this.userModel.find({ _id: { $in: userIds } });
   }
 }

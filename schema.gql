@@ -18,13 +18,35 @@ type LoginResponse {
   user: User!
 }
 
+"""blog """
+type Blog {
+  title: String!
+  text: String!
+  creationDate: Date!
+  creatorId: String!
+  creator: String!
+  textSnippet: String!
+}
+
+type BlogsResponse {
+  blogs: [Blog!]!
+  total: Float!
+}
+
 type Query {
   me: User
+  blogs(blogsArgs: BlogsArgs!): BlogsResponse!
+}
+
+input BlogsArgs {
+  page: Float!
+  quantity: Float!
 }
 
 type Mutation {
   login(loginInput: LoginUserInput!): LoginResponse
   register(newUserData: NewUserInput!): User!
+  addBlog(newBlog: NewBlogInput!): Blog!
 }
 
 input LoginUserInput {
@@ -37,4 +59,11 @@ input NewUserInput {
   password: String!
   email: String!
   creationDate: Date
+}
+
+input NewBlogInput {
+  title: String!
+  text: String!
+  creationDate: Date
+  creatorId: String
 }
