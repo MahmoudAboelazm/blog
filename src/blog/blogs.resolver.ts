@@ -33,7 +33,7 @@ export class BlogsResolver {
 
   @ResolveField(() => String)
   textSnippet(@Root() root: Blog) {
-    return root.text.slice(0, 5);
+    return root.text.slice(0, 180).trim() + '...';
   }
 
   @Mutation(() => Blog)
@@ -49,6 +49,11 @@ export class BlogsResolver {
 
   @Query(() => BlogsResponse)
   async blogs(@Args('blogsArgs') blogsArgs: BlogsArgs): Promise<BlogsResponse> {
-    return this.blogsService.getBlogs(blogsArgs);
+    return await this.blogsService.getBlogs(blogsArgs);
+  }
+
+  @Query(() => Blog, { nullable: true })
+  async getBlog(@Args('id') id: string): Promise<Blog | null> {
+    return await this.blogsService.findBlogById(id);
   }
 }

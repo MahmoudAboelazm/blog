@@ -20,6 +20,7 @@ type LoginResponse {
 
 """blog """
 type Blog {
+  _id: String!
   title: String!
   text: String!
   creationDate: Date!
@@ -36,6 +37,7 @@ type BlogsResponse {
 type Query {
   me: User
   blogs(blogsArgs: BlogsArgs!): BlogsResponse!
+  getBlog(id: String!): Blog
 }
 
 input BlogsArgs {

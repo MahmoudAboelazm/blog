@@ -14,7 +14,12 @@ import { UsersService } from './user/users.service';
     GraphQLModule.forRootAsync({
       imports: [UsersModule],
       inject: [UsersService],
+
       useFactory: (usersService: UsersService) => ({
+        cors: {
+          origin: 'http://localhost:3000',
+          credentials: true,
+        },
         installSubscriptionHandlers: true,
         autoSchemaFile: 'schema.gql',
         playground: true,

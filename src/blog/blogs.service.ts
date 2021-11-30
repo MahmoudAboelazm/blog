@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { BlogsArgs } from './dto/blogs-args.input';
 import { NewBlogInput } from './dto/new-blog.input';
 import { Blog, BlogsResponse } from './models/blog.model';
@@ -26,7 +26,11 @@ export class BlogsService {
       .limit(quantity);
 
     const total = await this.blogsModel.count();
-
     return { blogs, total };
+  }
+
+  async findBlogById(id: string): Promise<Blog | null> {
+    if (!Types.ObjectId.isValid(id)) return null;
+    return this.blogsModel.findById(id);
   }
 }

@@ -3,6 +3,9 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType({ description: 'blog ' })
 export class Blog {
   @Field(() => String)
+  _id: String;
+
+  @Field(() => String)
   title: String;
 
   @Field(() => String)

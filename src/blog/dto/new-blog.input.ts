@@ -4,11 +4,11 @@ import { Length } from 'class-validator';
 @InputType()
 export class NewBlogInput {
   @Field(() => String)
-  @Length(1, 30)
+  @Length(1, 50)
   title: string;
 
   @Field(() => String)
-  @Length(8, 255)
+  @Length(8, 1000)
   text: string;
 
   @Field(() => Date, { nullable: true })
