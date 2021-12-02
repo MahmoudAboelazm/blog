@@ -17,7 +17,7 @@ import { UsersService } from './user/users.service';
 
       useFactory: (usersService: UsersService) => ({
         cors: {
-          origin: 'http://localhost:3000',
+          origin: process.env.CLIENT,
           credentials: true,
         },
         installSubscriptionHandlers: true,

@@ -8,7 +8,7 @@ export class NewBlogInput {
   title: string;
 
   @Field(() => String)
-  @Length(8, 1000)
+  @Length(8, 5000)
   text: string;
 
   @Field(() => Date, { nullable: true })

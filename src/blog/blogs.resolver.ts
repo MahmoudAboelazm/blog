@@ -33,7 +33,8 @@ export class BlogsResolver {
 
   @ResolveField(() => String)
   textSnippet(@Root() root: Blog) {
-    return root.text.slice(0, 180).trim() + '...';
+    const idx = root.text.indexOf('#', 7);
+    return root.text.slice(7, idx).trim() + '...';
   }
 
   @Mutation(() => Blog)
